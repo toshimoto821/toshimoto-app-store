@@ -1,0 +1,43 @@
+manifestVersion: 1.1
+id: toshi-moto
+category: finance
+name: Toshi Moto
+version: "1.3.7-images.1"
+icon: https://toshimoto.app/toshi-icon-256.svg
+tagline: Toshi Moto is a watch-only Bitcoin wallet.
+description: >-
+  Toshi Moto is a watch-only Bitcoin wallet that allows you to monitor your Bitcoin addresses and transactions.
+
+
+  It will use your Xpub to scan addresses and aggregate balances and transactions across your different wallets.
+  It can not spend, it can not sign transactions, it can only be used to track your Bitcoin balance and transactions.
+
+  Your Xpub addresses and all other data stay in your browser and are not sent to any server. 
+
+  You can preview the app at https://toshimoto.app
+
+  Philosophy:
+    - Privacy first - This app does not use any analytics or tracking software. The app does not send any part of the request after the hash to the umbrel backend server. The backend server is only used to collect and store historical bitcoin pricing data from coingecko.
+    - Transparency - All source code is publicly available at https://github.com/toshimoto821/toshi-moto and licensed under the PolyForm Noncommercial 1.0.0 license.
+    - Education - My primary goal is to learn myself. Additionally help provide a tool to explore learn about Bitcoin and understand it.
+
+developer: Toshi Moto
+website: https://toshimoto.app
+dependencies:
+  - bitcoin
+  - mempool
+repo: https://github.com/toshimoto821/toshi-moto
+support: https://github.com/toshimoto821/toshi-moto
+port: 8021
+gallery:
+  - https://i.imgur.com/WRHU4SU.png
+  - https://i.imgur.com/Oofngfg.png
+  - https://i.imgur.com/yfaSNGv.png
+
+releaseNotes: >-
+  First release of Toshi Moto on Umbrel.
+path: ""
+defaultUsername: ""
+deterministicPassword: false
+submitter: Toshi Moto
+submission: https://github.com/getumbrel/umbrel-apps/pull/1132
