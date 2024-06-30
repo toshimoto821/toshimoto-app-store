@@ -3,7 +3,7 @@ version: "3.7"
 services:
   app_proxy:
     environment:
-      APP_HOST: toshi-moto_web_1
+      APP_HOST: toshi-collection-toshi-moto_web_1
       APP_PORT: 8080
       PROXY_AUTH_ADD: "false"
   api_web:
@@ -14,7 +14,7 @@ services:
       - mongodb
     environment:
       PORT: 8121
-      MONGODB_URI: "mongodb://toshi-moto_mongodb_1:27017/toshi-moto"
+      MONGODB_URI: "mongodb://toshi-collection-toshi-moto_mongodb_1:27017/toshi-moto"
   web:
     image: toshimoto821/toshi-moto:v1.3.6@sha256:b901d2f1801e068fe08d2373db43291b02c988b6d85ef7bfbe8290f87d706fba
     restart: on-failure
