@@ -7,7 +7,7 @@ services:
       APP_PORT: 8080
       PROXY_AUTH_ADD: "false"
   api_web:
-    image: toshimoto821/toshi-moto-api:v1.3.0@sha256:a313a939fef7da2991f8a25a6ee93fbcb0d5da97e5c411cadf031a75cdd11a74
+    image: toshimoto821/toshi-moto-api:v1.2.3@sha256:158a88f044f4e511670c35c7b78adb350316641a52803839977dc49fb41228e2
     restart: on-failure
     stop_grace_period: 1m
     depends_on:
