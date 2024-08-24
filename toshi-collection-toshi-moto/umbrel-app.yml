@@ -2,7 +2,7 @@ manifestVersion: 1.1
 id: toshi-collection-toshi-moto
 category: finance
 name: Toshi Moto
-version: "1.10.1-alpha.1"
+version: "1.10.2"
 icon: https://toshimoto.app/toshi-icon-256.svg
 tagline: Toshi Moto is a watch-only Bitcoin wallet.
 description: >-
