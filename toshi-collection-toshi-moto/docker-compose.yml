@@ -1,5 +1,5 @@
 version: "3.7"
-p
+
 services:
   app_proxy:
     environment:
