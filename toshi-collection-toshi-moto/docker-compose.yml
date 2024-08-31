@@ -16,7 +16,7 @@ services:
       PORT: 8121
       MONGODB_URI: "mongodb://toshi-collection-toshi-moto_mongodb_1:27017/toshi-moto"
   web:
-    image: toshimoto821/toshi-moto:v1.11.3@sha256:f861a9963e922da44b925a297453ac8f148ee2f2c553897c6037e6f2c1b9cb53
+    image: toshimoto821/toshi-moto:v1.11.4@sha256:1c7541c53841393fe14c60a49590ce03799cdba7383a77aad06f7fb8fbf350a2
     restart: on-failure
     stop_grace_period: 1m
     depends_on:
@@ -32,3 +32,5 @@ services:
       - ${APP_DATA_DIR}/data/db:/data/db
       - ${APP_DATA_DIR}/data/db/diagnostic.data:/data/db/diagnostic.data
       - ${APP_DATA_DIR}/data/db/journal:/data/db/journal
+    ports:
+      - "27017:27017" # Expose port 27017 to host
