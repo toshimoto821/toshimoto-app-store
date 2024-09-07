@@ -56,11 +56,11 @@ jobs:
           git push --set-upstream origin bump-web-image-version
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v5
+        uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           base: main
           branch: bump-web-image-version # This should match the name of your new branch
-          title: "Version Bump${{ github.event.inputs.version }}"
+          title: "Version Bump ${{ github.event.inputs.version }}"
           body: "This PR was created automatically by GitHub Actions."
           draft: false
