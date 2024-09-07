@@ -39,9 +39,6 @@ jobs:
 
       - name: Commit changes
         run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git checkout -b bump-web-image-version
           sed -i 's|version: .*|version: "${{ github.event.inputs.version }}"|' toshi-collection-toshi-moto/umbrel-app.yml
           sed -i 's|image: toshimoto821/toshi-moto:v[0-9.]*@sha256:[a-f0-9]*|image: toshimoto821/toshi-moto:${{ github.event.inputs.version }}@${{ github.event.inputs.digest }}|' toshi-collection-toshi-moto/docker-compose.yml
 
