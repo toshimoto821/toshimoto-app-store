@@ -48,7 +48,7 @@ jobs:
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git checkout -b bump-web-image-version
-          git add docker-compose.yml
+          git add toshi-collection-toshi-moto/docker-compose.yml toshi-collection-toshi-moto/umbrel-app.yml
           git commit -m 'Bump web image version to v1.16.0'
 
       - name: Push changes
