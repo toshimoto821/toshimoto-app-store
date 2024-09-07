@@ -2,16 +2,6 @@ name: Bump Web Image Version
 
 on:
   workflow_dispatch:
-    inputs:
-      version:
-        description: "The new version of the web image"
-        required: true
-        default: "1.15.1"
-      digest:
-        description: "The new SHA256 digest of the web image"
-        required: true
-        default: "sha256:1057a3283dfe2550130e6d128e258c9163421ba264c1e37e575003d9a88d08f4"
-
 jobs:
   bump-web-image:
     runs-on: ubuntu-latest
@@ -37,10 +27,19 @@ jobs:
           git push origin --delete bump-web-image-version
           git branch -D bump-web-image-version
 
+      - name: Get Docker Image Digest
+        id: get_digest
+        run: |
+          response=$(curl -s "https://hub.docker.com/v2/repositories/toshimoto821/toshi-moto/tags?page_size=1")
+          NAME=$(echo $response | jq -r '.results[0].name')
+          DIGEST=$(echo $response | jq -r '.results[0].digest')
+          echo "NAME=$NAME" >> $GITHUB_ENV
+          echo "DIGEST=$DIGEST" >> $GITHUB_ENV
+
       - name: Commit changes
         run: |
-          sed -i 's|version: .*|version: "${{ github.event.inputs.version }}"|' toshi-collection-toshi-moto/umbrel-app.yml
-          sed -i 's|image: toshimoto821/toshi-moto:v[0-9.]*@sha256:[a-f0-9]*|image: toshimoto821/toshi-moto:${{ github.event.inputs.version }}@${{ github.event.inputs.digest }}|' toshi-collection-toshi-moto/docker-compose.yml
+          sed -i 's|version: .*|version: "${{ env.NAME }}"|' toshi-collection-toshi-moto/umbrel-app.yml
+          sed -i 's|image: toshimoto821/toshi-moto:v[0-9.]*@sha256:[a-f0-9]*|image: toshimoto821/toshi-moto:${{ env.NAME }}@${{ env.DIGEST }}|' toshi-collection-toshi-moto/docker-compose.yml
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
