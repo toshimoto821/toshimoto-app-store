@@ -60,6 +60,6 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: bump-web-image-version
-          title: "Bump web image version to v1.16.0"
-          body: "This PR bumps the web image version to v1.16.0."
+          title: "Bump web image version to ${{ github.event.inputs.version }}"
+          body: "This PR bumps the web image version to ${{ github.event.inputs.version }}."
           labels: "automated pr"
