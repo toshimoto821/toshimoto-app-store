@@ -10,23 +10,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Check if branch exists
-        id: check_branch
-        run: |
-          if git show-ref --verify --quiet refs/heads/bump-web-image-version; then
-            echo "##[set-output name=branch_exists;]true"
-          else
-            echo "##[set-output name=branch_exists;]false"
-          fi
-
-      - name: Delete existing branch
-        if: steps.check_branch.outputs.branch_exists == 'true'
-        run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git push origin --delete bump-web-image-version
-          git branch -D bump-web-image-version
-
       - name: Get Docker Image Digest
         id: get_digest
         run: |
