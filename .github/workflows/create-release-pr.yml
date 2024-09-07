@@ -28,7 +28,7 @@ jobs:
         run: |
           sed -i 's|version: .*|version: "${{ env.WEB_VERSION }}"|' toshi-collection-toshi-moto/umbrel-app.yml
           sed -i 's|image: toshimoto821/toshi-moto:[0-9.]*@sha256:[a-f0-9]*|image: toshimoto821/toshi-moto:${{ env.WEB_VERSION }}@${{ env.WEB_DIGEST }}|' toshi-collection-toshi-moto/docker-compose.yml
-          sed -i 's|image: toshimoto821/toshi-moto-api:[0-9.]*@sha256:[a-f0-9]*|image: toshimoto821/toshi-moto-api:${{ env.WEB_VERSION }}@${{ env.WEB_DIGEST }}|' toshi-collection-toshi-moto/docker-compose.yml
+          sed -i 's|image: toshimoto821/toshi-moto-api:[0-9.]*@sha256:[a-f0-9]*|image: toshimoto821/toshi-moto-api:${{ env.API_WEB_VERSION }}@${{ env.API_WEB_DIGEST }}|' toshi-collection-toshi-moto/docker-compose.yml
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
