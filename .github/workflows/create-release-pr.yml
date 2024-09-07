@@ -48,17 +48,17 @@ jobs:
           git commit -m 'Bump web image version to ${{ github.event.inputs.version }}'
           git push origin bump-web-image-version
 
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v7
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          base: master
-          branch: bump-web-image-version
-          title: "Version Bump ${{ github.event.inputs.version }}"
-          body: "This PR was created automatically by GitHub Actions."
-          draft: false
-          branch-suffix: "" # Ensure no suffix is added to the branch name
-          commit-message: "Bump web image version to ${{ github.event.inputs.version }}"
-          committer: "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
-          author: "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
-          signoff: false
+      # - name: Create Pull Request
+      #   uses: peter-evans/create-pull-request@v7
+      #   with:
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     base: master
+      #     branch: bump-web-image-version
+      #     title: "Version Bump ${{ github.event.inputs.version }}"
+      #     body: "This PR was created automatically by GitHub Actions."
+      #     draft: false
+      #     branch-suffix: "" # Ensure no suffix is added to the branch name
+      #     commit-message: "Bump web image version to ${{ github.event.inputs.version }}"
+      #     committer: "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
+      #     author: "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
+      #     signoff: false
