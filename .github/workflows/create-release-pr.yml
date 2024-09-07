@@ -6,11 +6,11 @@ on:
       version:
         description: "The new version of the web image"
         required: true
-        default: "v1.16.0"
-      hash:
-        description: "The new SHA256 hash of the web image"
+        default: "1.15.1"
+      digest:
+        description: "The new SHA256 digest of the web image"
         required: true
-        default: "newsha256hash"
+        default: "sha256:1057a3283dfe2550130e6d128e258c9163421ba264c1e37e575003d9a88d08f4"
 
 jobs:
   bump-web-image:
@@ -37,7 +37,11 @@ jobs:
 
       - name: Update web image version
         run: |
-          sed -i 's|image: toshimoto821/toshi-moto:v[0-9.]*@sha256:[a-f0-9]*|image: toshimoto821/toshi-moto:${{ github.event.inputs.version }}@sha256:${{ github.event.inputs.hash }}|' docker-compose.yml
+          sed -i 's|image: toshimoto821/toshi-moto:v[0-9.]*@sha256:[a-f0-9]*|image: toshimoto821/toshi-moto:${{ github.event.inputs.version }}@${{ github.event.inputs.digest }}|' toshi-collection-toshi-moto/docker-compose.yml
+
+      - name: Update version in umbrel.app.yml
+        run: |
+          sed -i 's|version: .*|version: ${{ github.event.inputs.version }}|' toshi-collection-toshi-moto/umbrel.app.yml
 
       - name: Commit changes
         run: |
