@@ -46,9 +46,6 @@ jobs:
           sed -i 's|image: toshimoto821/toshi-moto:v[0-9.]*@sha256:[a-f0-9]*|image: toshimoto821/toshi-moto:${{ github.event.inputs.version }}@${{ github.event.inputs.digest }}|' toshi-collection-toshi-moto/docker-compose.yml
           git add toshi-collection-toshi-moto/docker-compose.yml toshi-collection-toshi-moto/umbrel-app.yml
           git commit -m 'Bump web image version to ${{ github.event.inputs.version }}'
-
-      - name: Push changes
-        run: |
           git push --set-upstream origin bump-web-image-version
 
       - name: Create Pull Request
