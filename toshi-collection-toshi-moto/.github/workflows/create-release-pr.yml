@@ -1,0 +1,61 @@
+name: Bump Web Image Version
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "The new version of the web image"
+        required: true
+        default: "v1.16.0"
+      hash:
+        description: "The new SHA256 hash of the web image"
+        required: true
+        default: "newsha256hash"
+
+jobs:
+  bump-web-image:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Check if branch exists
+        id: check_branch
+        run: |
+          if git show-ref --verify --quiet refs/heads/bump-web-image-version; then
+            echo "##[set-output name=branch_exists;]true"
+          else
+            echo "##[set-output name=branch_exists;]false"
+          fi
+
+      - name: Delete existing branch
+        if: steps.check_branch.outputs.branch_exists == 'true'
+        run: |
+          git push origin --delete bump-web-image-version
+          git branch -D bump-web-image-version
+
+      - name: Update web image version
+        run: |
+          sed -i 's|image: toshimoto821/toshi-moto:v[0-9.]*@sha256:[a-f0-9]*|image: toshimoto821/toshi-moto:${{ github.event.inputs.version }}@sha256:${{ github.event.inputs.hash }}|' docker-compose.yml
+
+      - name: Commit changes
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git checkout -b bump-web-image-version
+          git add docker-compose.yml
+          git commit -m 'Bump web image version to v1.16.0'
+
+      - name: Push changes
+        run: |
+          git push --set-upstream origin bump-web-image-version
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: bump-web-image-version
+          title: "Bump web image version to v1.16.0"
+          body: "This PR bumps the web image version to v1.16.0."
+          labels: "automated pr"
