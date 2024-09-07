@@ -59,8 +59,9 @@ jobs:
         uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          base: main
+          base: master
           branch: bump-web-image-version # This should match the name of your new branch
           title: "Version Bump ${{ github.event.inputs.version }}"
           body: "This PR was created automatically by GitHub Actions."
           draft: false
+          delete-branch: true
