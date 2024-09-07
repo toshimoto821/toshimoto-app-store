@@ -41,7 +41,7 @@ jobs:
 
       - name: Update version in umbrel-app.yml
         run: |
-          sed -i 's|version: .*|version: ${{ github.event.inputs.version }}|' toshi-collection-toshi-moto/umbrel-app.yml
+          sed -i 's|version: .*|version: "${{ github.event.inputs.version }}"|' toshi-collection-toshi-moto/umbrel-app.yml
 
       - name: Commit changes
         run: |
