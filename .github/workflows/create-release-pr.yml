@@ -19,8 +19,8 @@ jobs:
           echo "WEB_VERSION=$WEB_VERSION" >> $GITHUB_ENV
           echo "WEB_DIGEST=$WEB_DIGEST" >> $GITHUB_ENV
           api_response=$(curl -s "https://hub.docker.com/v2/repositories/toshimoto821/toshi-moto-api/tags?page_size=1")
-          API_WEB_VERSION=$(echo $response | jq -r '.results[0].name')
-          API_WEB_DIGEST=$(echo $response | jq -r '.results[0].digest')
+          API_WEB_VERSION=$(echo $api_response | jq -r '.results[0].name')
+          API_WEB_DIGEST=$(echo $api_response | jq -r '.results[0].digest')
           echo "API_WEB_VERSION=$API_WEB_VERSION" >> $GITHUB_ENV
           echo "API_WEB_DIGEST=$API_WEB_DIGEST" >> $GITHUB_ENV
 
