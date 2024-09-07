@@ -32,6 +32,8 @@ jobs:
       - name: Delete existing branch
         if: steps.check_branch.outputs.branch_exists == 'true'
         run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git push origin --delete bump-web-image-version
           git branch -D bump-web-image-version
 
@@ -45,9 +47,6 @@ jobs:
 
       - name: Commit changes
         run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git checkout -b bump-web-image-version
           git add toshi-collection-toshi-moto/docker-compose.yml toshi-collection-toshi-moto/umbrel-app.yml
           git commit -m 'Bump web image version to ${{ github.event.inputs.version }}'
 
