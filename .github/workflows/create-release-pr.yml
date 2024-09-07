@@ -36,7 +36,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           base: master
           branch: bump-web-image-version
-          title: "Version Bump ${{ env.VERSION }}"
+          title: "Version Bump ${{ env.WEB_VERSION }}"
           body: "This PR was created automatically by GitHub Actions."
           draft: false
           branch-suffix: "" # Ensure no suffix is added to the branch name
