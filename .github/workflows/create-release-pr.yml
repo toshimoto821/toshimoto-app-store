@@ -44,21 +44,18 @@ jobs:
           git checkout -b bump-web-image-version
           sed -i 's|version: .*|version: "${{ github.event.inputs.version }}"|' toshi-collection-toshi-moto/umbrel-app.yml
           sed -i 's|image: toshimoto821/toshi-moto:v[0-9.]*@sha256:[a-f0-9]*|image: toshimoto821/toshi-moto:${{ github.event.inputs.version }}@${{ github.event.inputs.digest }}|' toshi-collection-toshi-moto/docker-compose.yml
-          git add -A
-          git commit -m 'Bump web image version to ${{ github.event.inputs.version }}'
-          git push origin bump-web-image-version
 
-      # - name: Create Pull Request
-      #   uses: peter-evans/create-pull-request@v7
-      #   with:
-      #     token: ${{ secrets.GITHUB_TOKEN }}
-      #     base: master
-      #     branch: bump-web-image-version
-      #     title: "Version Bump ${{ github.event.inputs.version }}"
-      #     body: "This PR was created automatically by GitHub Actions."
-      #     draft: false
-      #     branch-suffix: "" # Ensure no suffix is added to the branch name
-      #     commit-message: "Bump web image version to ${{ github.event.inputs.version }}"
-      #     committer: "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
-      #     author: "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
-      #     signoff: false
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          base: master
+          branch: bump-web-image-version
+          title: "Version Bump ${{ github.event.inputs.version }}"
+          body: "This PR was created automatically by GitHub Actions."
+          draft: false
+          branch-suffix: "" # Ensure no suffix is added to the branch name
+          commit-message: "Bump web image version to ${{ github.event.inputs.version }}"
+          committer: "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
+          author: "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
+          signoff: false
