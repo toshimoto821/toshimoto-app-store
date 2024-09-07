@@ -64,4 +64,3 @@ jobs:
           title: "Version Bump ${{ github.event.inputs.version }}"
           body: "This PR was created automatically by GitHub Actions."
           draft: false
-          delete-branch: true
