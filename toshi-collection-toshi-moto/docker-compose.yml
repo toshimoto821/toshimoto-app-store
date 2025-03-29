@@ -16,7 +16,7 @@ services:
       PORT: 8121
       MONGODB_URI: "mongodb://toshi-collection-toshi-moto_mongodb_1:27017/toshi-moto"
   web:
-    image: toshimoto821/toshi-moto:1.24.1@sha256:b99de3ac8c3ec650ce08618c78f34855ea04cbe39a930a04251e43becafbc967
+    image: toshimoto821/toshi-moto:1.24.2@sha256:ab112ce6064ca2daf1bb53a7715df573ce98ee37e062664992515796668027b3
     restart: on-failure
     stop_grace_period: 1m
     depends_on:
