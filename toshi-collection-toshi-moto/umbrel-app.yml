@@ -2,27 +2,29 @@ manifestVersion: 1.1
 id: toshi-collection-toshi-moto
 category: finance
 name: Toshi Moto
-version: "1.24.5"
+version: "1.24.6"
 icon: https://www.webshotarchive.com/assets/toshi-256.svg
-tagline: Toshi Moto is a watch-only Bitcoin wallet.
+tagline: Secure Bitcoin portfolio monitoring with privacy-first design
 description: >-
-  Toshi Moto is a watch-only Bitcoin wallet that allows you to monitor your Bitcoin addresses and transactions.
+  Toshi Moto is a watch-only Bitcoin wallet designed for secure portfolio monitoring and transaction tracking.
 
+  Key Features:
+  • Import your extended public key (Xpub) to monitor multiple Bitcoin addresses simultaneously
+  • Real-time balance aggregation across all your wallets and addresses
+  • Comprehensive transaction history and monitoring capabilities
+  • Privacy-focused: All data remains local to your browser - no sensitive information is transmitted to servers
+  • Read-only security: Cannot spend or sign transactions, ensuring your funds remain safe
 
-  It will use your Xpub to scan addresses and aggregate balances and transactions across your different wallets.
-  It can not spend, it can not sign transactions, it can only be used to track your Bitcoin balance and transactions.
+  Core Principles:
+  • Privacy First: Zero analytics or tracking. Your Xpub and transaction data never leave your browser. The backend only collects historical Bitcoin price data from CoinGecko.
+  • Complete Transparency: Open-source code available at https://github.com/toshimoto821/toshi-moto under PolyForm Noncommercial 1.0.0 license
+  • Educational Focus: Designed to help users understand Bitcoin fundamentals while providing practical portfolio management tools
 
-  Your Xpub addresses and all other data stay in your browser and are not sent to any server. 
+  Perfect for Bitcoin enthusiasts who want to monitor their holdings securely without compromising privacy or security.
 
-  You can preview the app at https://toshimoto.app
+  This project was created by, maintained and sponsored by Webshot Archive. Visit https://www.webshotarchive.com for more information.
 
-  Philosophy:
-    - Privacy first: This app does not use any analytics or tracking software. The app does not send any part of the request after the hash to the umbrel backend server. The backend server is only used to collect and store historical bitcoin pricing data from coingecko.
-    - Transparency: All source code is publicly available at https://github.com/toshimoto821/toshi-moto and licensed under the PolyForm Noncommercial 1.0.0 license.
-    - Education: My primary goal is to learn myself. Additionally help provide a tool to explore learn about Bitcoin and understand it.
-
-developer: Toshi Moto
-website: https://toshimoto.app
+developer: Webshot Archive
 dependencies:
   - bitcoin
   - mempool
@@ -35,7 +37,7 @@ gallery:
   - https://i.imgur.com/yfaSNGv.png
 
 releaseNotes: >-
-  First release of Toshi Moto on Umbrel.
+  Initial release of Toshi Moto on Umbrel - bringing secure, privacy-focused Bitcoin portfolio monitoring to the Umbrel ecosystem.
 path: ""
 defaultUsername: ""
 deterministicPassword: false
