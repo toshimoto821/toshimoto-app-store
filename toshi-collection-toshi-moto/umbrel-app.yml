@@ -3,7 +3,7 @@ id: toshi-collection-toshi-moto
 category: finance
 name: Toshi Moto
 version: "1.24.9"
-icon:
+icon: https://www.webshotarchive.com/assets/toshi-256.svg
 tagline: Secure Bitcoin portfolio monitoring with privacy-first design
 description: >-
   Toshi Moto is a watch-only Bitcoin wallet designed for secure portfolio monitoring and transaction tracking.
@@ -32,7 +32,11 @@ repo: https://github.com/toshimoto821/toshi-moto
 support: https://github.com/toshimoto821/toshi-moto
 port: 8021
 gallery:
-
+  - https://i.imgur.com/WRHU4SU.png
+  - https://i.imgur.com/Oofngfg.png
+  - https://i.imgur.com/yfaSNGv.png
+  - https://i.imgur.com/yfaSNGv.png
+  - https://i.imgur.com/yfaSNGv.png
 releaseNotes: >-
   Initial release of Toshi Moto on Umbrel - bringing secure, privacy-focused Bitcoin portfolio monitoring to the Umbrel ecosystem.
 path: ""
