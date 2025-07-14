@@ -19,6 +19,7 @@ services:
   web:
     image: toshimoto821/toshi-moto:1.25.1@sha256:8af06da7e5a1a2068861f63c3c7e7b2082aa0858256d67a04ead2d5399867123
     restart: on-failure
+    user: 1000:1000
     stop_grace_period: 1m
     depends_on:
       - api_web
