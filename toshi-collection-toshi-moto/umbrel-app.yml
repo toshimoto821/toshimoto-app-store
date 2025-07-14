@@ -2,27 +2,23 @@ manifestVersion: 1.1
 id: toshi-collection-toshi-moto
 category: finance
 name: Toshi Moto
-version: "1.24.7"
+version: "1.24.8"
 icon: https://www.webshotarchive.com/assets/toshi-256.svg
 tagline: Secure Bitcoin portfolio monitoring with privacy-first design
 description: >-
   Toshi Moto is a watch-only Bitcoin wallet designed for secure portfolio monitoring and transaction tracking.
 
-  Key Features:
-  • Import your extended public key (Xpub) to monitor multiple Bitcoin addresses simultaneously
-  • Real-time balance aggregation across all your wallets and addresses
-  • Comprehensive transaction history and monitoring capabilities
-  • Privacy-focused: All data remains local to your browser - no sensitive information is transmitted to servers
-  • Read-only security: Cannot spend or sign transactions, ensuring your funds remain safe
 
-  Core Principles:
-  • Privacy First: Zero analytics or tracking. Your Xpub and transaction data never leave your browser. The backend only collects historical Bitcoin price data from CoinGecko.
-  • Complete Transparency: Open-source code available at https://github.com/toshimoto821/toshi-moto under PolyForm Noncommercial 1.0.0 license
-  • Educational Focus: Designed to help users understand Bitcoin fundamentals while providing practical portfolio management tools
+  Key Features:
+
+  - Import your extended public key (Xpub) to monitor multiple Bitcoin addresses simultaneously
+  - Real-time balance aggregation across all your wallets and addresses
+  - Comprehensive transaction history and monitoring capabilities
+  - Privacy-focused: All data remains local to your browser - no sensitive information is transmitted to servers
+  - Read-only security: Cannot spend or sign transactions, ensuring your funds remain safe
+
 
   Perfect for Bitcoin enthusiasts who want to monitor their holdings securely without compromising privacy or security.
-
-  This project was created by, maintained and sponsored by Webshot Archive. Visit https://www.webshotarchive.com for more information.
 
 developer: Webshot Archive
 dependencies:
