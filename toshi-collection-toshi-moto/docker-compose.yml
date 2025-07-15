@@ -32,6 +32,7 @@ services:
     image: mongo:8.0.10@sha256:15fb53a5160ebabff5ecade8f8b5d48721b68ea190957a7f35b5b38e8340e62b
     stop_grace_period: 1m
     user: 1000:1000
+    command: mongod --noauth
     volumes:
       - ${APP_DATA_DIR}/data/db:/data/db
       - ${APP_DATA_DIR}/data/db/diagnostic.data:/data/db/diagnostic.data
