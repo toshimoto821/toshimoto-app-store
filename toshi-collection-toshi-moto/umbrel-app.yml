@@ -4,6 +4,7 @@ category: finance
 name: Toshi Moto
 version: "1.27.2"
 icon: https://www.webshotarchive.com/assets/toshi-256.svg
+website: https://toshimoto.app
 tagline: Secure Bitcoin portfolio monitoring with privacy-first design
 description: >-
   Toshi Moto is a watch-only Bitcoin wallet designed for secure portfolio monitoring and transaction tracking.
