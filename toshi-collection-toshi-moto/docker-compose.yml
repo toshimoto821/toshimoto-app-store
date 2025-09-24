@@ -7,7 +7,7 @@ services:
       APP_PORT: 8021
       PROXY_AUTH_ADD: "false"
   api_web:
-    image: toshimoto821/toshi-moto-api:1.8.2@sha256:e92c9c5843cc03fedb1da2145727275dd98871098b62f9e9abecd79a65b22091
+    image: toshimoto821/toshi-moto-api:1.8.3@sha256:98fd0b774e3e07dab3776faca5ad98af6b1d89c92ca4a22d7058e3639793e2bf
     restart: on-failure
     stop_grace_period: 1m
     user: 1000:1000
@@ -17,7 +17,7 @@ services:
       PORT: 8121
       MONGODB_URI: "mongodb://toshi-collection-toshi-moto_mongodb_1:27017/toshi-moto"
   web:
-    image: toshimoto821/toshi-moto:1.32.3@sha256:2c9ff3e2f1bc86a83690c9214b63bdadee7f9ef3f589e83132e8928b74f8c4ef
+    image: toshimoto821/toshi-moto:1.32.4@sha256:4ce2f37725a91e0b6c841074378928005598673b9ec8ac6c06f0b8fad920eece
     restart: on-failure
     user: 1000:1000
     stop_grace_period: 1m
