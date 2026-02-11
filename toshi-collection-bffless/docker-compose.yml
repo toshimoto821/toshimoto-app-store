@@ -1,0 +1,189 @@
+version: "3.7"
+
+services:
+  # Umbrel app proxy - routes external traffic to our nginx
+  app_proxy:
+    environment:
+      APP_HOST: toshi-collection-bffless_nginx_1
+      APP_PORT: 5537
+      PROXY_AUTH_ADD: "false"
+
+  # Nginx reverse proxy - serves frontend, routes API calls
+  nginx:
+    image: nginx:1.27-alpine@sha256:aed5b02a85f568e1eb1ece333ef72d902bc772daa7a92b9b963e9b6208605942
+    restart: on-failure
+    stop_grace_period: 30s
+    volumes:
+      - ${APP_DATA_DIR}/data/proxy/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ${APP_DATA_DIR}/data/setup:/usr/share/nginx/html/setup:ro
+      - frontend-dist:/usr/share/nginx/html/app:ro
+    depends_on:
+      backend:
+        condition: service_started
+      frontend:
+        condition: service_started
+    deploy:
+      resources:
+        limits:
+          memory: 64M
+        reservations:
+          memory: 32M
+    networks:
+      - default
+
+  # PostgreSQL database
+  postgres:
+    image: postgres:17-alpine@sha256:c4813a47d6edbc72f6f3e57aac793ac2aba68dd0e6a9d8fa67c0dd5ca64249e6
+    restart: on-failure
+    stop_grace_period: 30s
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${APP_SEED:-bffless}
+      POSTGRES_DB: assethost
+    volumes:
+      - ${APP_DATA_DIR}/data/postgres:/var/lib/postgresql/data
+      - ${APP_DATA_DIR}/data/db/init-databases.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    command: >
+      postgres
+      -c shared_buffers=64MB
+      -c effective_cache_size=128MB
+      -c work_mem=4MB
+      -c maintenance_work_mem=32MB
+      -c max_connections=20
+      -c wal_buffers=4MB
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 128M
+    networks:
+      - default
+
+  # SuperTokens authentication service
+  supertokens:
+    image: registry.supertokens.io/supertokens/supertokens-postgresql@sha256:6fd83bdd8970da04f8ecc7e81fb40cf9de3b98c62e57db3afbb3447b56e668f4
+    restart: on-failure
+    stop_grace_period: 30s
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      POSTGRESQL_CONNECTION_URI: postgresql://postgres:${APP_SEED:-bffless}@toshi-collection-bffless_postgres_1:5432/supertokens
+      JAVA_OPTS: "-Xmx128m -Xms64m -XX:+UseSerialGC -XX:MaxMetaspaceSize=64m"
+      POSTGRESQL_CONNECTION_POOL_SIZE: "3"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3567/hello"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 128M
+    networks:
+      - default
+
+  # NestJS backend API
+  backend:
+    image: ghcr.io/bffless/ce-backend:latest
+    restart: on-failure
+    stop_grace_period: 30s
+    depends_on:
+      postgres:
+        condition: service_healthy
+      supertokens:
+        condition: service_healthy
+    environment:
+      NODE_OPTIONS: "--max-old-space-size=128"
+      NODE_ENV: production
+      PORT: "3000"
+      LOG_LEVEL: "error,warn,log"
+
+      # Database
+      DATABASE_URL: postgresql://postgres:${APP_SEED:-bffless}@toshi-collection-bffless_postgres_1:5432/assethost
+
+      # Storage - local filesystem (no MinIO)
+      STORAGE_TYPE: local
+      UPLOADS_PATH: /app/uploads
+      ENABLE_MINIO: "false"
+
+      # Cache - in-memory (no Redis)
+      CACHE_TYPE: memory
+      ENABLE_REDIS: "false"
+
+      # Security keys (generated from APP_SEED)
+      ENCRYPTION_KEY: ${APP_SEED:-bffless}${APP_SEED:-bffless}
+      JWT_SECRET: ${APP_SEED:-bffless}${APP_SEED:-bffless}
+      API_KEY_SALT: ${APP_SEED:-bffless}${APP_SEED:-bffless}
+
+      # SuperTokens
+      SUPERTOKENS_MODE: local
+      SUPERTOKENS_CONNECTION_URI: http://toshi-collection-bffless_supertokens_1:3567
+      SUPERTOKENS_API_KEY: ""
+
+      # URLs - localhost for internal, real domain via CF Tunnel
+      PRIMARY_DOMAIN: localhost
+      FRONTEND_URL: http://localhost:5537
+      API_DOMAIN: http://localhost:5537
+      ADMIN_DOMAIN: localhost
+
+      # Cookie settings for local development
+      COOKIE_SECURE: "false"
+      COOKIE_DOMAIN: ""
+
+      # Nginx config (not used in Umbrel, but required by backend)
+      NGINX_SITES_PATH: /etc/nginx/sites-enabled
+      NGINX_RELOAD_WAIT_MS: "3000"
+
+      # Feature flags
+      FEATURE_WILDCARD_SSL: "false"
+      FEATURE_WILDCARD_SSL_BANNER: "false"
+      FEATURE_DOMAIN_SSL_TOGGLE: "false"
+    volumes:
+      - ${APP_DATA_DIR}/data/uploads:/app/uploads
+      - nginx-sites:/etc/nginx/sites-enabled
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 128M
+    networks:
+      - default
+
+  # React frontend (serves static files)
+  frontend:
+    image: ghcr.io/bffless/ce-frontend:latest
+    restart: on-failure
+    stop_grace_period: 30s
+    volumes:
+      - frontend-dist:/app/dist
+    depends_on:
+      backend:
+        condition: service_started
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+        reservations:
+          memory: 64M
+    networks:
+      - default
+
+volumes:
+  frontend-dist:
+    driver: local
+  nginx-sites:
+    driver: local
+
+networks:
+  default:
+    name: toshi-collection-bffless_default
