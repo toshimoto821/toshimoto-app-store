@@ -1,13 +1,13 @@
 manifestVersion: 1.1
 id: toshi-collection-bffless
 category: developer-tools
-name: Bffless
-version: '0.1.0'
-icon: https://www.bffless.app/images/logo-circle.svg
+name: BFFless
+version: '0.1.12'
+icon: https://raw.githubusercontent.com/bffless/docs-public/main/static/img/logo.svg
 website: https://www.bffless.app
 tagline: Self-hosted static site hosting platform
 description: >-
-  Bffless is a self-hosted platform for hosting static websites and build artifacts from CI/CD pipelines.
+  BFFless is a self-hosted platform for hosting static websites and build artifacts from CI/CD pipelines.
 
 
   Key Features:
@@ -30,20 +30,20 @@ description: >-
 
   Note: This app requires a Cloudflare Tunnel for external domain access. Internal access shows setup instructions.
 
-developer: Bffless
+developer: BFFless
 dependencies: []
 repo: https://github.com/bffless/ce
 support: https://github.com/bffless/ce/issues
 port: 5537
 gallery:
-  - https://docs.bffless.app/img/setup-wizard-step1.png
-  - https://docs.bffless.app/img/viewing-deployment-browser.png
-  - https://docs.bffless.app/img/repository-overview-red.png
+  - https://raw.githubusercontent.com/bffless/docs-public/main/static/img/setup-wizard-step1.png
+  - https://raw.githubusercontent.com/bffless/docs-public/main/static/img/viewing-deployment-browser.png
+  - https://raw.githubusercontent.com/bffless/docs-public/main/static/img/repository-overview.png
 
 releaseNotes: >-
-  Initial release of Bffless on Umbrel - bringing self-hosted static site hosting to the Umbrel ecosystem.
+  Fixed nginx startup issue on read-only filesystems. Inlined entrypoint to avoid cached file conflicts.
 path: ''
 defaultUsername: ''
 deterministicPassword: false
-submitter: Bffless
+submitter: Toshi Moto
 submission: https://github.com/getumbrel/umbrel-apps/pull/0000
