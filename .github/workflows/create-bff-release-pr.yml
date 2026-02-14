@@ -1,0 +1,64 @@
+name: Bump BFFless Image Version
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version number to set (e.g., 0.1.15)'
+        required: true
+        type: string
+
+jobs:
+  bump-bff-image:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Get Docker Image Digests from GHCR
+        id: get_digests
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Get frontend digest
+          FRONTEND_DIGEST=$(gh api -H "Accept: application/vnd.oci.image.index.v1+json" /orgs/bffless/packages/container/ce-frontend/versions --jq '.[] | select(.metadata.container.tags | contains(["umbrel"])) | .name' | head -1)
+          echo "FRONTEND_DIGEST=$FRONTEND_DIGEST" >> $GITHUB_ENV
+          echo "Frontend digest: $FRONTEND_DIGEST"
+
+          # Get backend digest
+          BACKEND_DIGEST=$(gh api -H "Accept: application/vnd.oci.image.index.v1+json" /orgs/bffless/packages/container/ce-backend/versions --jq '.[] | select(.metadata.container.tags | contains(["umbrel"])) | .name' | head -1)
+          echo "BACKEND_DIGEST=$BACKEND_DIGEST" >> $GITHUB_ENV
+          echo "Backend digest: $BACKEND_DIGEST"
+
+      - name: Update docker-compose.yml
+        run: |
+          # Update frontend image with digest
+          sed -i 's|image: ghcr.io/bffless/ce-frontend:umbrel.*|image: ghcr.io/bffless/ce-frontend:umbrel@${{ env.FRONTEND_DIGEST }}|' toshi-collection-bffless/docker-compose.yml
+
+          # Update backend image with digest
+          sed -i 's|image: ghcr.io/bffless/ce-backend:umbrel.*|image: ghcr.io/bffless/ce-backend:umbrel@${{ env.BACKEND_DIGEST }}|' toshi-collection-bffless/docker-compose.yml
+
+      - name: Update umbrel-app.yml version
+        run: |
+          sed -i "s|^version: .*|version: '${{ inputs.version }}'|" toshi-collection-bffless/umbrel-app.yml
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          base: bffless
+          branch: bump-bff-image-version
+          title: "BFFless Version Bump ${{ inputs.version }}"
+          body: |
+            This PR was created automatically by GitHub Actions.
+
+            **Version:** ${{ inputs.version }}
+            **Frontend Digest:** ${{ env.FRONTEND_DIGEST }}
+            **Backend Digest:** ${{ env.BACKEND_DIGEST }}
+          draft: false
+          branch-suffix: ""
+          commit-message: "Bump BFFless image version to ${{ inputs.version }}"
+          committer: "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
+          author: "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
+          signoff: false
