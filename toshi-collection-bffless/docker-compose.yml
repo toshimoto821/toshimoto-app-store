@@ -113,7 +113,7 @@ services:
 
   # NestJS backend API
   backend:
-    image: ghcr.io/bffless/ce-backend:umbrel@sha256:68d2d74751196af650e0c7a460b61b58218727d2cdc02f9865dad8ff9c2de1bb
+    image: ghcr.io/bffless/ce-backend:umbrel@sha256:66b2688cf2aeb13946df383efa950cf1ac0a6776f2381afab95ee7e75d41447b
     restart: on-failure
     stop_grace_period: 30s
     entrypoint: /app/umbrel-entrypoint.sh
@@ -169,7 +169,7 @@ services:
 
   # React frontend (serves static files)
   frontend:
-    image: ghcr.io/bffless/ce-frontend:umbrel@sha256:c86c4de958fe08e11266e15025d7dc10727dac36ed9b310e94db54e4abd2635b
+    image: ghcr.io/bffless/ce-frontend:umbrel@sha256:a37e50ea4b09e6033a1842efd7155d1657073305b068f655543aa0b91c8b4b54
     restart: on-failure
     stop_grace_period: 30s
     volumes:
