@@ -2,7 +2,7 @@ manifestVersion: 1.1
 id: toshi-collection-bffless
 category: developer-tools
 name: BFFless
-version: '0.0.33'
+version: '0.0.36'
 icon: https://raw.githubusercontent.com/bffless/docs-public/main/static/img/logo.svg
 website: https://www.bffless.app
 tagline: Self-hosted static site hosting platform
