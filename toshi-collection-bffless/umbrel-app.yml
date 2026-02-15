@@ -4,7 +4,7 @@ category: developer-tools
 name: BFFless
 version: '0.0.37'
 icon: https://raw.githubusercontent.com/bffless/docs-public/main/static/img/logo.svg
-website: https://www.bffless.app
+website: https://bffless.app
 tagline: Self-hosted static site hosting platform
 description: >-
   BFFless is a self-hosted platform for hosting static websites and build artifacts from CI/CD pipelines.
@@ -36,9 +36,9 @@ repo: https://github.com/bffless/ce
 support: https://github.com/bffless/ce/issues
 port: 5537
 gallery:
-  - https://raw.githubusercontent.com/bffless/docs-public/main/static/img/setup-wizard-step1.png
   - https://raw.githubusercontent.com/bffless/docs-public/main/static/img/viewing-deployment-browser.png
-  - https://raw.githubusercontent.com/bffless/docs-public/main/static/img/repository-overview.png
+  - https://raw.githubusercontent.com/bffless/docs-public/main/static/img/admin-home.png
+  - https://raw.githubusercontent.com/bffless/docs-public/main/static/img/setup-wizard-step1.png
 
 releaseNotes: >-
   Fixed nginx startup issue on read-only filesystems. Inlined entrypoint to avoid cached file conflicts.
