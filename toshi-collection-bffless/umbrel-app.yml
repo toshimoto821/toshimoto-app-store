@@ -4,7 +4,7 @@ category: developer-tools
 name: BFFless
 version: '0.0.39'
 icon: https://raw.githubusercontent.com/bffless/docs-public/main/static/img/logo.svg
-website: https://bffless.app
+website: https://docs.bffless.app/deployment/umbrel/
 tagline: Self-hosted static site hosting platform
 description: >-
   BFFless is a self-hosted platform for hosting static websites and build artifacts from CI/CD pipelines.
