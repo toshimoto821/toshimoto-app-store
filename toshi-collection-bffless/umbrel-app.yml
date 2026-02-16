@@ -2,7 +2,7 @@ manifestVersion: 1.1
 id: toshi-collection-bffless
 category: developer
 name: BFFless
-version: '0.0.39-app-store'
+version: '0.0.39-app-store.1'
 icon: ''
 website: https://docs.bffless.app/deployment/umbrel/
 tagline: Self-hosted static site hosting platform
