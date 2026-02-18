@@ -169,9 +169,10 @@ services:
       - nginx-sites:/etc/nginx/sites-enabled
 
   # React frontend (serves static files)
+  # Note: No user specified - runs as root to ensure it can overwrite volume files
+  # regardless of ownership. This container only copies files and sleeps.
   frontend:
     image: ghcr.io/bffless/ce-frontend:umbrel@sha256:e5b9416bd4dfa3ddb975845ce5e3800aa2ed6ac88e2bdf74f4b906a7b008391d
-    user: "1000:1000"
     restart: on-failure
     stop_grace_period: 30s
     volumes:
