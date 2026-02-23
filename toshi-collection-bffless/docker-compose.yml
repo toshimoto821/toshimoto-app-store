@@ -2,7 +2,7 @@ services:
   # Umbrel app proxy - routes external traffic to our nginx
   app_proxy:
     environment:
-      APP_HOST: bffless_nginx_1
+      APP_HOST: toshi-collection-bffless_nginx_1
       APP_PORT: 5537
       PROXY_AUTH_ADD: 'false'
 
