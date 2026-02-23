@@ -115,7 +115,7 @@ services:
   # Note: No user specified - runs as root to ensure it can write to volume mounts
   # regardless of host directory ownership. Umbrel is a trusted single-user environment.
   backend:
-    image: ghcr.io/bffless/ce-backend:umbrel@sha256:e86ca77aabec9205583f25edb40627c5cfc372def7aa8fd11dbd0bef5635d166
+    image: ghcr.io/bffless/ce-backend:umbrel@sha256:8973b0a06dc347a8a0bcade1ee21e97ec2331ec0842fdcfa5568bdf9e8bcc916
     restart: on-failure
     stop_grace_period: 30s
     entrypoint: /app/umbrel-entrypoint.sh
@@ -173,7 +173,7 @@ services:
   # Note: No user specified - runs as root to ensure it can overwrite volume files
   # regardless of ownership. This container only copies files and sleeps.
   frontend:
-    image: ghcr.io/bffless/ce-frontend:umbrel@sha256:0fb99664e596fcb9fa6b8957c43094bd6f15600c2d3fc7e511915cbde0146df2
+    image: ghcr.io/bffless/ce-frontend:umbrel@sha256:dc8bd7a9d8e3e0176a491ff25a0a31c7f6e19e5156885ccbcb1466633be78371
     restart: on-failure
     stop_grace_period: 30s
     volumes:
