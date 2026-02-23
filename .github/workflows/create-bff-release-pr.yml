@@ -31,6 +31,11 @@ jobs:
           echo "BACKEND_DIGEST=$BACKEND_DIGEST" >> $GITHUB_ENV
           echo "Backend digest: $BACKEND_DIGEST"
 
+          # Get nginx digest
+          NGINX_DIGEST=$(gh api -H "Accept: application/vnd.github+json" /orgs/bffless/packages/container/ce-nginx/versions --jq '.[] | select(.metadata.container.tags | contains(["umbrel"])) | .name' | head -1)
+          echo "NGINX_DIGEST=$NGINX_DIGEST" >> $GITHUB_ENV
+          echo "Nginx digest: $NGINX_DIGEST"
+
       - name: Update docker-compose.yml
         run: |
           # Update frontend image with digest
@@ -38,6 +43,9 @@ jobs:
 
           # Update backend image with digest
           sed -i 's|image: ghcr.io/bffless/ce-backend:umbrel.*|image: ghcr.io/bffless/ce-backend:umbrel@${{ env.BACKEND_DIGEST }}|' toshi-collection-bffless/docker-compose.yml
+
+          # Update nginx image with digest
+          sed -i 's|image: ghcr.io/bffless/ce-nginx:umbrel.*|image: ghcr.io/bffless/ce-nginx:umbrel@${{ env.NGINX_DIGEST }}|' toshi-collection-bffless/docker-compose.yml
 
       - name: Update umbrel-app.yml version
         run: |
@@ -56,6 +64,7 @@ jobs:
             **Version:** ${{ inputs.version }}
             **Frontend Digest:** ${{ env.FRONTEND_DIGEST }}
             **Backend Digest:** ${{ env.BACKEND_DIGEST }}
+            **Nginx Digest:** ${{ env.NGINX_DIGEST }}
           draft: false
           branch-suffix: ""
           commit-message: "Bump BFFless image version to ${{ inputs.version }}"
