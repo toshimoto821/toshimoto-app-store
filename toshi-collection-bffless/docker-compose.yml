@@ -25,7 +25,7 @@ services:
 
   # PostgreSQL database
   postgres:
-    image: postgres:17-alpine@sha256:3430fe182f5065a6ea505c3d432d2c7fff18fbab954df8f277c1dbf4c70124af
+    image: pgvector/pgvector:0.8.2-pg17@sha256:494dff7e67e7bc2c826b94c331364978d145ebb86fd338154138b084223b7f67
     restart: on-failure
     stop_grace_period: 30s
     environment:
