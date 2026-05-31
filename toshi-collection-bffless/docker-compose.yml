@@ -18,7 +18,7 @@ services:
       # User config (domain.txt) - writable by user
       - ${APP_DATA_DIR}/data/config:/app/config:ro
       # Frontend static files from frontend container
-      - frontend-dist:/usr/share/nginx/html/app:ro
+      - ${APP_DATA_DIR}/data/frontend:/usr/share/nginx/html/app:ro
       # Dynamic domain configs written by backend
       - nginx-sites:/etc/nginx/sites-enabled
     depends_on:
@@ -145,5 +145,4 @@ services:
       - backend
 
 volumes:
-  frontend-dist:
   nginx-sites:
