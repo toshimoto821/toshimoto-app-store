@@ -9,7 +9,7 @@ services:
   # Nginx reverse proxy - serves frontend, routes API calls
   # Uses custom umbrel image with baked-in config template and setup page
   nginx:
-    image: ghcr.io/bffless/ce-nginx:umbrel@sha256:98da1dc1aa8928dc30f2fbe9aa0ad3e6d2c8f9269dc2b2f8f48ad045c76e56cd
+    image: ghcr.io/bffless/ce-nginx:umbrel@sha256:c49cbce6626ba73ccf296d7e39d4e192996fb613fb11d4ff7994ef8e7115afc4
     restart: on-failure
     stop_grace_period: 30s
     environment:
@@ -79,7 +79,7 @@ services:
   # NestJS backend API
   # Uses custom umbrel image with baked-in entrypoint that derives keys from APP_SEED
   backend:
-    image: ghcr.io/bffless/ce-backend:umbrel@sha256:ba75dcfa6372664f5d81b5e0d5861fd8ed16ea58ae378ff909e9e667b71d8079
+    image: ghcr.io/bffless/ce-backend:umbrel@sha256:c974e83fd5f1cfea84b2c35db4417f3250a2ef322af476704aef93b61176cc0c
     restart: on-failure
     stop_grace_period: 30s
     depends_on:
@@ -136,7 +136,7 @@ services:
 
   # React frontend (serves static files)
   frontend:
-    image: ghcr.io/bffless/ce-frontend:umbrel@sha256:589b5e485769035635927f0a80f9d9aa8eeefc19680760839d772ef50a4e572f
+    image: ghcr.io/bffless/ce-frontend:umbrel@sha256:f31234703e2a5baa4d913b30a26ea39077ac2283f5f0f3f90cdaab0133e91a97
     restart: on-failure
     stop_grace_period: 30s
     volumes:
